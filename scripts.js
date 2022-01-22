@@ -1,6 +1,9 @@
+/* create an array containing rock paper scissors */
 const rochambeau = ["Rock", "Paper", "Scissors"]
 
+/* create a function that plays rock paper scissors with the computer */
 function rockPaperScissors(x) {
+/* Have the computer pick values from the array that can be compared with the players choice */    
    let computerSelection = rochambeau[Math.floor(Math.random()*rochambeau.length)].toUpperCase(); 
    let playerSelection = x.toUpperCase();
    if (playerSelection === "ROCK" && computerSelection === "SCISSORS") {
@@ -21,3 +24,31 @@ function rockPaperScissors(x) {
        return "That's not how you play!"
    }
 }
+/* create a function game() that keeps score in a prompt window */
+function game() {
+  /* Use a foor loop ot iterate through the score */
+  for (let player = 0, js = 0; player + js < 5; player, js) {
+    let match = prompt("Rock, Paper, Scissors?");
+    let rps = rockPaperScissors(match);
+        switch (true) {
+            case (rps.includes("win!")):
+            alert(rps + " Player Score: " + (++player) + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
+            break;
+            case (rps.includes("lose!")):
+            alert(rps + " Player Score: " + player + " vs. JS Score: " + (++js) + " \nBest of 5. Play again?" );
+            break;
+            case (rps.includes("tie!")):
+            alert(rps + " Player Score: " + player + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
+            break;
+            case (rps.includes("not")):
+            alert(rps + " Player Score: " + player + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
+            break;
+        }
+        if (player + js === 5 && player > js) {
+            alert("You win! Thanks for playing!")
+        } else if (player + js === 5 && player < js) {
+            alert("You lose! Lets play again sometime.")
+        }
+    }
+}
+    

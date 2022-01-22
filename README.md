@@ -14,3 +14,17 @@ For tie return "It's a tie!"
 Else return "That's not how you play!" for any other input x
 
 I intend on returning to the script to try and write it as a switch statement in the meantime. I also intend on returning to create a webpage and game out of it as opposed to just playing in the console. 
+
+Fri Jan 21 10:22
+Part 2! The next step of the project is to have the computer keep score and play a game out of 5. Using a for loop isn't necessary, but since I jumped ahead in my learning, I decided to give it a try. Here is the initial algorithm I wrote before tackling the challenge:
+
+Create a function game that keeps score and contains function rockPaperScissors
+Open a window prompt asking Rock, Paper, Scissors?
+Input player's answer/move
+Call the rockPaperScissors function with the player's input
+Create a for loop to iterate through the score
+Use if/else/switch to tally score
+Prompt the player to play again each round and loop until 5 rounds are over
+Alert with you win or you lose
+
+The issue I ran into this time was with the scope of the for loop. I initially put the rockPaperScissors function outside of the loop, so even though I would get a new prompt everytime I input my move, the for loop would return a value at random. 
