@@ -62,8 +62,7 @@ const playerImage = new Image();
 playerImage.src = 'images/trainer.png'
 const pokeballImage = new Image();
 pokeballImage.src = 'images/pokeball.png'
-const cyndaquil = new Image();
-pokeballImage.src = 'images/cyndaquil.png'
+
 
 // Player (trainer) Variables
 let frameX = 0;
@@ -107,9 +106,9 @@ function animate(){
                 ballGameCoordinateY++;
             } else {
                 cancelAnimationFrame(pokeballAnimate);
-                function choosePokemon 
             }
         }
+        pokeballAnimate();
     }
 }
 animate();
