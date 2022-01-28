@@ -51,4 +51,69 @@ function game() {
         }
     }
 }
+
+const canvas = document.getElementById('canvas1');
+const ctx = canvas.getContext('2d');
+
+const canvasWidth = canvas.width = 300;
+const canvasHeight = canvas.height = 300;
+
+const playerImage = new Image();
+playerImage.src = 'images/trainer.png'
+const pokeballImage = new Image();
+pokeballImage.src = 'images/pokeball.png'
+const cyndaquil = new Image();
+pokeballImage.src = 'images/cyndaquil.png'
+
+// Player (trainer) Variables
+let frameX = 0;
+let trainerCoordinateX = 0;
+let spriteWidth = 70;
+let gameFrame = 0;
+let gameCoordinateX = 0;
+let coordinateX = 0;
+const staggerFrames = 15;
+// Pokeball Variables
+let ballFrame = 0;
+let ballGameCoordinateX = 0;
+let ballGameCoordinateY = 0;
+const staggerBallFrames = 400;
+
+function animate(){
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+    let position = Math.floor(gameFrame/staggerFrames) % 6;
+    let trainerPositionX = Math.floor(gameCoordinateX/staggerFrames) % 5;
+    frameX = spriteWidth * position;
+    trainerCoordinateX = trainerPositionX * -25
+    ctx.drawImage(playerImage, frameX, 0, spriteWidth, 54, trainerCoordinateX, 150, 150, 150);
+    requestAnimationFrame(animate)
+    if (frameX < 350) {
+        gameFrame++;
+        gameCoordinateX++; 
+    } else {
+        cancelAnimationFrame(animate);
+        function pokeballAnimate() {
+            let ballPosition = Math.floor(ballFrame/staggerBallFrames) % 8;
+            let ballPositionX = Math.floor(ballGameCoordinateX/staggerBallFrames) % 8;
+            let ballPositionY = Math.floor(ballGameCoordinateY/staggerBallFrames) % 8;
+            let ballFrameX = 40 * ballPosition;
+            let ballCoordinateX = -80 + (ballPositionX * 25);
+            let ballCoordinateY = 0 + (ballPositionY * 5);
+            ctx.drawImage(pokeballImage, ballFrameX, 0, 40, 50, ballCoordinateX, ballCoordinateY, 150, 150);
+            requestAnimationFrame(pokeballAnimate);
+            if (ballFrameX < 280) {
+                ballFrame++;
+                ballGameCoordinateX++;
+                ballGameCoordinateY++;
+            } else {
+                cancelAnimationFrame(pokeballAnimate);
+                function choosePokemon 
+            }
+        }
+    }
+}
+animate();
+
+
+
     
