@@ -1,5 +1,32 @@
 #canvas1 {
+    box-sizing: border-box;
     border: 5px solid black;
     width: 300px;
     height: 300px;
+}
+
+#canvas2 {
+    box-sizing: border-box;
+    border: 5px solid black;
+    width: 300px;
+    height: 300px;
+}
+
+.pokemonschool {
+    display: flex;
+    justify-content: space-between;
+}
+
+.professortext,
+.trainertext {
+    box-sizing: border-box;
+    border: 5px solid black;
+    padding: 5px;
+    width: 300px;
+    min-height: 75px;
+    font-family: Courier, sans-serif;
+}
+
+.pickyourpokemon {
+    display: none;
 }
