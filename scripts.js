@@ -1,57 +1,3 @@
-/* create an array containing rock paper scissors */
-const rochambeau = ["Rock", "Paper", "Scissors"]
-
-/* create a function that plays rock paper scissors with the computer */
-function rockPaperScissors(x) {
-/* Have the computer pick values from the array that can be compared with the players choice */    
-   let computerSelection = rochambeau[Math.floor(Math.random()*rochambeau.length)].toUpperCase(); 
-   let playerSelection = x.toUpperCase();
-   if (playerSelection === "ROCK" && computerSelection === "SCISSORS") {
-       return "You win! Rock beats scissors."
-   } else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
-       return "You win! Paper beats rock."
-   } else if (playerSelection === "SCISSORS" && computerSelection === "PAPER") {
-       return "You win! Scissors beats paper." 
-   } else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
-       return "You lose! Paper beats rock."
-   } else if (playerSelection === "PAPER" && computerSelection === "SCISSORS") {
-       return "You lose! Scissors beats paper." 
-   } else if (playerSelection === "SCISSORS" && computerSelection === "ROCK") {
-       return "You lose! Rock beats scissors." 
-   } else if (playerSelection === computerSelection) {
-       return "It's a tie!"
-   } else {
-       return "That's not how you play!"
-   }
-}
-/* create a function game() that keeps score in a prompt window */
-function game() {
-  /* Use a foor loop ot iterate through the score */
-  for (let player = 0, js = 0; player + js < 5; player, js) {
-    let match = prompt("Rock, Paper, Scissors?");
-    let rps = rockPaperScissors(match);
-        switch (true) {
-            case (rps.includes("win!")):
-            alert(rps + " Player Score: " + (++player) + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
-            break;
-            case (rps.includes("lose!")):
-            alert(rps + " Player Score: " + player + " vs. JS Score: " + (++js) + " \nBest of 5. Play again?" );
-            break;
-            case (rps.includes("tie!")):
-            alert(rps + " Player Score: " + player + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
-            break;
-            case (rps.includes("not")):
-            alert(rps + " Player Score: " + player + " vs. JS Score: " + js + " \nBest of 5. Play again?" );
-            break;
-        }
-        if (player + js === 5 && player > js) {
-            alert("You win! Thanks for playing!")
-        } else if (player + js === 5 && player < js) {
-            alert("You lose! Lets play again sometime.")
-        }
-    }
-}
-
 const canvas = document.getElementById('canvas1');
 const ctx = canvas.getContext('2d');
 
@@ -89,50 +35,112 @@ let spriteWidth = 70;
 let gameFrame = 0;
 let gameCoordinateX = 0;
 let coordinateX = 0;
-const staggerFrames = 7;
+let staggerFrames = 7;
 
 // Pokeball Variables
 let ballFrame = 0;
 let ballGameCoordinateX = 0;
 let ballGameCoordinateY = 0;
-const staggerBallFrames = 200;
+let staggerBallFrames = 5;
 
 // Computer Variables
 let computerCoordinateX = 150;
 let ball2Frame = 0;
 let ball2GameCoordinateX = 0;
 let ball2GameCoordinateY = 0;
-const staggerBall2Frames = 200;
+let staggerBall2Frames = 5;
 
+let trainerScore = 0;
+let computerScore = 0;
+
+
+const typeChoice = document.querySelector('.pickyourpokemon');
 const fire = document.querySelector('#fire');
 const water = document.querySelector('#water');
 const grass = document.querySelector('#grass');
+const returnPokemon = document.querySelector('#returnpokemon');
+const rematch = document.querySelector('#playagain');
 
+const battle = ["fire", "water", "grass"];
 let variation = 0
-
-function chooseFire () {
-    animate();
-    variation = 1;
-    animateComputer();
-}
-
-function chooseWater () {
-    animate();
-    variation = 2;
-    animateComputer();
-}
-
-function chooseGrass () {
-    animate();
-    variation = 3
-    animateComputer();
-}
+let computerSelection = ""
 
 fire.addEventListener('click', chooseFire);
 water.addEventListener('click', chooseWater);
 grass.addEventListener('click', chooseGrass);
+returnPokemon.addEventListener('click', returnPoke);
+rematch.addEventListener('click', playAgain)
+
+function chooseFire() {
+    animate();
+    variation = 1;
+    animateComputer();
+    computerSelection = battle[Math.floor(Math.random()*battle.length)]
+    returnPokemon.style.display = 'flex';
+    typeChoice.style.display = 'none';
+    trainerText.textContent = `Cyndaquil, I choose you!`
+}
+
+function chooseWater() {
+    animate();
+    variation = 2;
+    animateComputer();
+    computerSelection = battle[Math.floor(Math.random()*battle.length)]
+    returnPokemon.style.display = 'flex';
+    typeChoice.style.display = 'none';
+    trainerText.textContent = `Totodile, I choose you!`
+}
+
+function chooseGrass() {
+    animate();
+    variation = 3
+    animateComputer();
+    computerSelection = battle[Math.floor(Math.random()*battle.length)]
+    returnPokemon.style.display = 'flex';
+    typeChoice.style.display = 'none';
+    trainerText.textContent = `Chikorita, I choose you!`
+}
+
+function returnPoke() {
+    returnPokemon.style.display = 'none';
+    rematch.style.display = 'flex';
+    cancelAnimationFrame(animate);
+    cancelAnimationFrame(animateComputer);
+    staticTrainer();
+    staticComputer();
+    staggerFrames += 10;
+    staggerBallFrames += 5;
+    staggerBall2Frames += 10;
+    fireWaterGrass();
+}
+
+function playAgain() {
+    if (trainerScore < 3 && computerScore < 3) {
+        rematch.style.display = 'none';
+        typeChoice.style.display = 'flex';
+        game();
+        frameX = 0;
+        trainerCoordinateX = 0;
+        spriteWidth = 70;
+        gameFrame = 0;
+        gameCoordinateX = 0;
+        coordinateX = 0;
+        ballFrame = 0;
+        ballGameCoordinateX = 0;
+        ballGameCoordinateY = 0;
+        computerCoordinateX = 150;
+        ball2Frame = 0;
+        ball2GameCoordinateX = 0;
+        ball2GameCoordinateY = 0;
+    } else if (trainerScore == 3)  {
+        trainerWin();
+    } else if (computerScore == 3) {
+        computerWin();
+    }
+}
 
 function animate(){
+    cancelAnimationFrame(staticTrainer);
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
     let position = Math.floor(gameFrame/staggerFrames) % 6;
     let trainerPositionX = Math.floor(gameCoordinateX/staggerFrames) % 5;
@@ -144,86 +152,60 @@ function animate(){
         gameFrame++;
         gameCoordinateX++; 
     } else {
-        cancelAnimationFrame(animate);
-        pokeballAnimate();
-    }
-} 
-
-function pokeballAnimate() {
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    let ballPosition = Math.floor(ballFrame/staggerBallFrames) % 8;
-    let ballPositionX = Math.floor(ballGameCoordinateX/staggerBallFrames) % 8;
-    let ballPositionY = Math.floor(ballGameCoordinateY/staggerBallFrames) % 8;
-    let ballFrameX = 40 * ballPosition;
-    let ballCoordinateX = -80 + (ballPositionX * 25);
-    let ballCoordinateY = 20 + (ballPositionY * 5);
-    ctx.drawImage(pokeballImage, ballFrameX, 0, 40, 50, ballCoordinateX, ballCoordinateY, 150, 150);
-    requestAnimationFrame(pokeballAnimate);
-    if (ballFrameX < 280) {
-        ballFrame++;
-        ballGameCoordinateX++;
-        ballGameCoordinateY++;
-    } else {
-        cancelAnimationFrame(pokeballAnimate);
-        if (variation == 1) {
-            cyndaquilPokemon();
-        } else if (variation == 2) {
-            totodilePokemon();
-        } else if (variation == 3) {
-            chikoritaPokemon();
+        let ballPosition = Math.floor(ballFrame/staggerBallFrames) % 8;
+        let ballPositionX = Math.floor(ballGameCoordinateX/staggerBallFrames) % 8;
+        let ballPositionY = Math.floor(ballGameCoordinateY/staggerBallFrames) % 8;
+        let ballFrameX = 40 * ballPosition;
+        let ballCoordinateX = -80 + (ballPositionX * 25);
+        let ballCoordinateY = 20 + (ballPositionY * 5);
+        ctx.drawImage(pokeballImage, ballFrameX, 0, 40, 50, ballCoordinateX, ballCoordinateY, 150, 150);
+        if (ballFrameX < 280) {
+            ballFrame++;
+            ballGameCoordinateX++;
+            ballGameCoordinateY++;
+        } else {
+            if (variation == 1) {
+                ctx.drawImage(cyndaquil, 70, 90, 150, 150);
+            } else if (variation == 2) {
+                ctx.drawImage(totodile, 70, 90, 150, 150);
+            } else if (variation == 3) {
+                ctx.drawImage(chikorita, 70, 90, 150, 150);
+            }
         }
     }
 } 
 
 function animateComputer(){
+    cancelAnimationFrame(staticComputer);
     ctx2.clearRect(0, 0, canvas2Width, canvas2Height);
     ctx2.drawImage(computerImage, computerCoordinateX, 0, 150, 150);
     requestAnimationFrame(animateComputer);
     if (computerCoordinateX < 270) {
         computerCoordinateX += 3;
     } else {
-        cancelAnimationFrame(animateComputer);
-        pokeballComputer();
+        let ball2Position = Math.floor(ball2Frame/staggerBall2Frames) % 8;
+        let ball2PositionX = Math.floor(ball2GameCoordinateX/staggerBall2Frames) % 8;
+        let ball2PositionY = Math.floor(ball2GameCoordinateY/staggerBall2Frames) % 8;
+        let ball2FrameX = 40 * ball2Position;
+        let ball2CoordinateX = 280 - (ball2PositionX * 25);
+        let ball2CoordinateY = -30 + (ball2PositionY * 5);
+        ctx2.drawImage(computerPokeball, ball2FrameX, 0, 40, 50, ball2CoordinateX, ball2CoordinateY, 150, 150);
+        if (ball2FrameX < 280) {
+            ball2Frame++;
+            ball2GameCoordinateX++;
+            ball2GameCoordinateY++;
+        } else {
+            if (computerSelection == "fire") {
+                ctx2.drawImage(cyndaquil, 70, 90, 150, 150);
+            } else if (computerSelection == "water") {
+                ctx2.drawImage(totodile, 70, 90, 150, 150);
+            } else if (computerSelection == "grass") {
+                ctx2.drawImage(chikorita, 70, 90, 150, 150);
+            } 
+        }
     }
 } 
 
-function pokeballComputer() {
-    ctx2.clearRect(0, 0, canvas2Width, canvas2Height);
-    let ball2Position = Math.floor(ball2Frame/staggerBall2Frames) % 8;
-    let ball2PositionX = Math.floor(ball2GameCoordinateX/staggerBall2Frames) % 8;
-    let ball2PositionY = Math.floor(ball2GameCoordinateY/staggerBall2Frames) % 8;
-    let ball2FrameX = 40 * ball2Position;
-    let ball2CoordinateX = 280 - (ball2PositionX * 25);
-    let ball2CoordinateY = -30 + (ball2PositionY * 5);
-    ctx2.drawImage(computerPokeball, ball2FrameX, 0, 40, 50, ball2CoordinateX, ball2CoordinateY, 150, 150);
-    requestAnimationFrame(pokeballComputer);
-    if (ball2FrameX < 280) {
-        ball2Frame++;
-        ball2GameCoordinateX++;
-        ball2GameCoordinateY++;
-    } else {
-        cancelAnimationFrame(pokeballComputer);
-    }
-}
-
-
-function cyndaquilPokemon(){
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.drawImage(cyndaquil, 70, 90, 150, 150);
-    requestAnimationFrame(cyndaquilPokemon);
-}
-
-function totodilePokemon(){
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.drawImage(totodile, 70, 90, 150, 150);
-    requestAnimationFrame(totodilePokemon);
-}
-
-function chikoritaPokemon(){
-    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
-    ctx.drawImage(chikorita, 70, 90, 150, 150);
-    requestAnimationFrame(chikoritaPokemon);
-}
 
 function staticTrainer(){
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
@@ -240,38 +222,34 @@ function staticComputer(){
 staticTrainer();
 staticComputer(); 
 
-
-const battle = [fire, water, grass]
-
-
+const trainerText = document.querySelector('.trainertext');
 const professorText = document.querySelector('.professortext');
-
 const dialogue = document.querySelector('#dialogue');
 
-const typeChoice = document.querySelector('.pickyourpokemon');
+trainerText.textContent = "I'm finally 10 and ready to embark on my Pokemon Journey."
 
 function askName() {
-    if (dialogue.textContent === "Got it!") {
+    if (trainerText.textContent == "I'm finally 10 and ready to embark on my Pokemon Journey.") {
         let newPlayer = prompt("What is your name?");
         if (newPlayer != null) {
             professorText.textContent =
             "Nice to meet you " + newPlayer + "!";
-            dialogue.textContent = "Hello!";
+            trainerText.textContent = "Hello!";
         }
-    } else if (dialogue.textContent === "Hello!") {
+    } else if (trainerText.textContent === "Hello!") {
         professorText.textContent = 
         `Today, we'll be learning about basic types
         by playing a classic game of Rochambeau, but
         with a pokemon twist!`;
-        dialogue.textContent = "Ok!";
-    } else if (dialogue.textContent === "Ok!") {
+        trainerText.textContent = "Ok!";
+    } else if (trainerText.textContent === "Ok!") {
         professorText.textContent =
         `The rules are simple. You select Fire, Water, 
         or Grass type. Upon selecting, we'll both throw
         our pokemon and see which has the type advantage.
-        Best of 5 wins!`;
-        dialogue.textContent = "Let's Play!";
-    } else if (dialogue.textContent === "Let's Play!") {
+        Best 3 out of 5 wins!`;
+        trainerText.textContent = "Let's Play!";
+    } else if (trainerText.textContent === "Let's Play!") {
         typeChoice.style.display = "flex";
         dialogue.style.display = "none";
         professorText.textContent = ``;
@@ -280,10 +258,60 @@ function askName() {
 
 dialogue.addEventListener('click', askName);
 
+function fireWaterGrass() {
+    if (variation === 1 && computerSelection === "grass") {
+        professorText.textContent = `You win! Fire beats grass.`
+        trainerText.textContent = `It's super effective!`
+        ++trainerScore;
+    } else if (variation === 2 && computerSelection === "fire") {
+        professorText.textContent = `You win! Water beats fire.`
+        trainerText.textContent = `It's super effective!`
+        ++trainerScore;
+    } else if (variation === 3 && computerSelection === "water") {
+        professorText.textContent = `You win! Grass beats water.`
+        trainerText.textContent = `It's super effective!`
+        ++trainerScore;
+    } else if (variation === 1 && computerSelection === "water") {
+        professorText.textContent = `You lose! Water beats fire.`
+        trainerText.textContent = `It's not very effective...`
+        ++computerScore;
+    } else if (variation === 2 && computerSelection === "grass") {
+        professorText.textContent = `You lose! Grass beats water.` 
+        trainerText.textContent = `It's not very effective...`
+        ++computerScore;
+    } else if (variation === 3 && computerSelection === "fire") {
+        professorText.textContent =  `You lose! Fire beats grass.`
+        trainerText.textContent = `It's not very effective...`
+        ++computerScore;
+    } else if (variation === 1 && computerSelection === "fire" 
+    || variation === 2 && computerSelection === "water" 
+    || variation === 3 && computerSelection === "grass" ) {
+        trainerText.textContent = `What now professor?`
+        professorText.textContent = `It's a tie!`
+    } 
+}
 
-dialogue.addEventListener('click', explainRules);
+function game() {
+    if (trainerText.textContent == `It's super effective!`) {
+        professorText.textContent = `Your score is ${trainerScore}. Mine is ${computerScore}.
+        Best 3 out of 5. Play again?`
+    } else if (trainerText.textContent == `It's not very effective...`) {
+        professorText.textContent = `Your score is ${trainerScore}. Mine is ${computerScore}.
+        Best 3 out of 5. Play again?`
+    } else if (trainerText.textContent == `What now professor?`) {
+        professorText.textContent = `Your score is ${trainerScore}. Mine is ${computerScore}.
+        Best 3 out of 5. Play again?`
+    }
+}
 
+function trainerWin() {
+    trainerText.textContent = `I knew I could do it!`
+    professorText.textContent = `That all for today's lesson. You win!`
+}
 
-
+function computerWin() {
+    trainerText.textContent = `Darn. Almost had it.`
+    professorText.textContent = `We might need to practice more later. You lose!`
+}
 
 

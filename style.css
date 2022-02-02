@@ -1,8 +1,19 @@
+body {
+    background-image: url(images/clearcase.jpg);
+}
+
 #canvas1 {
     box-sizing: border-box;
     border: 5px solid black;
     width: 300px;
     height: 300px;
+    background-color: rgb(211, 211, 211, 0.75);
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 15px;
+    box-shadow: 0 .2em gray; 
 }
 
 #canvas2 {
@@ -10,6 +21,13 @@
     border: 5px solid black;
     width: 300px;
     height: 300px;
+    background-color: rgb(211, 211, 211, 0.5);
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 15px;
+    box-shadow: 0 .2em gray; 
 }
 
 .pokemonschool {
@@ -25,8 +43,97 @@
     width: 300px;
     min-height: 75px;
     font-family: Courier, sans-serif;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 10px;
+    box-shadow: 0 .2em gray; 
+}
+
+.trainertext {
+    background-color: rgb(211, 211, 211, 0.85);
+}
+
+.professortext {
+    background-color: rgb(211, 211, 211, 0.75);
 }
 
 .pickyourpokemon {
     display: none;
+}
+
+#returnpokemon {
+    display: none;
+    justify-content: space-between;
+}
+
+#playagain {
+    display: none;
+}
+
+.computerbuttons {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+#dialogue {
+    font-size: large;
+    font-family: Courier, sans-serif;
+    text-shadow: 1px 1px pink, -1px -1px maroon;
+    line-height: 3em;
+	text-align: center;
+	display: inline-block;
+	width: 3em;
+    -webkit-border-radius: .75em;
+	-moz-border-radius: .75em;
+	-o-border-radius: .75em;
+    border-radius: 5em;
+    background-color: red;
+    -webkit-box-shadow:  0 .2em maroon;
+	-moz-box-shadow:  0 .2em maroon;
+	-o-box-shadow:  0 .2em maroon;
+	box-shadow:  0 .2em maroon;
+	color: red;
+	margin: 5px;
+	background-color: red;
+	background-image: -o-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+    background-image: -moz-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: -webkit-linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	background-image: linear-gradient(left top, pink 3%, red 22%, maroon 99%);
+	cursor: pointer;
+    padding-left: 5px;
+}
+
+#fire,
+#water,
+#grass,
+#returnpokemon,
+#playagain {
+    font-family: Courier, sans-serif;
+    text-align: center;
+	margin:5px;
+    font-weight: bold;
+    padding: 2px 20px 2px;
+    background-color: lightgray;
+    text-shadow: -1px -1px black, 1px 1px white;
+    color: gray;
+    -webkit-border-radius: 7px;
+	-moz-border-radius: 7px;
+	-o-border-radius: 7px;
+	border-radius: 15px;
+    box-shadow: 0 .2em gray; 
+    cursor: pointer;
+
+}
+
+#fire:active,
+#water:active,
+#grass:active,
+#returnpokemon:active,
+#playagain:active,
+#dialogue:active {
+    box-shadow: none;
+	position: relative;
+	top: .2em;
 }
