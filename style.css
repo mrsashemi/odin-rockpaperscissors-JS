@@ -105,6 +105,7 @@ body {
     padding-left: 5px;
 }
 
+#reload,
 #fire,
 #water,
 #grass,
@@ -124,9 +125,10 @@ body {
 	border-radius: 15px;
     box-shadow: 0 .2em gray; 
     cursor: pointer;
-
 }
 
+
+#reload:active
 #fire:active,
 #water:active,
 #grass:active,

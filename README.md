@@ -68,8 +68,9 @@ Ask to play again
 For my first javascript project, this one was a challenge! I broke down the process into smaller steps, focusing first on the Javascript before moving onto styling the page:
 
 1) focusing first on the javascript animations. 
-   I found some spritesheets that would be ideal for this project, and started with a tutorial on how to animate them. The method is essentially to drawImage using all 9 parameters, and then isolate a single sprite into the canvas. From there you write a function that adjusts the sx parameter to change isolated sprite and then requestAnimationFrame.
-   This on its own works but is too fast. I found a method to create a framerate. 
+   I found some spritesheets that would be ideal for this project, and started with a tutorial on how to animate them. The method is essentially to drawImage using all 9 parameters. If a sprite sheet has 5 different images, for example, you would drawImage in such a way that it would crop out one image to isolate a single sprite into the canvas. From there you write a function that adjusts the drawImage sx parameter to change which sprite is being isolated and then requestAnimationFrame.
+
+   This on its own works but create an animation that is too fast. I found a method to create a framerate. 
    
    Create a frame variable and a stagger variable
    Mouth round frame/stagger modulus #ofFrames
@@ -81,7 +82,7 @@ For my first javascript project, this one was a challenge! I broke down the proc
 
    In this case, you then multiply that number by sx = 50, until you reach sx = 250. This essentially moves the sx much more slowly creating somewhat of a framerate. 
 
-   I repeated these steps to get all the various animations working together. There were some hiccups in how things stiched but it ultimately worked out, namely I found the animation functions to run better when they werent split up into smaller functions. Everytime I split the functions up for the pokeball and trainer, I found the stagger frames for the pokeball were significantly higher (300 vs around 10). It seems the javascript would run the animation much too quickly whenever they were function call backs involved. I ran into a similar problem, when resetting the animation with function buttons to rerun it, but I was able to remedy it by adding to the stagger frames each time I reran the animation. 
+   I repeated these steps to get all the various animations working together. There were some hiccups in how things stitched together but it ultimately worked out, namely I found the animation functions to run better when they werent split up into smaller functions. Everytime I split the functions up for the pokeball and trainer, I found the stagger frames for the pokeball were significantly higher (300 vs around 10). It seems the javascript would run the animation much too quickly whenever they were function call backs involved. I ran into a similar problem, when resetting the animation with function buttons to rerun it, but I was able to remedy it by adding to the stagger frames each time I reran the animation. 
 
    Since the spritesheets were not very clean and evenly spaced when I found them, I decided to cut out the sprites I needed to make it simpler to work with in drawImage() functions. It also meant I could adjust the spacing as needed to get a more consistent sx in the draw image.
 
@@ -94,4 +95,10 @@ For my first javascript project, this one was a challenge! I broke down the proc
     I decided against using a loop this time– it caused the page to slow down too much so instead I used simple if statements and created two variables to keep score for the trainer and computer respectively. I then used if else statements. If the score wasn't 3 for either computer or trainer, the game reran. If it was 3, the game finished and the computer gave you the results.
 
 4) stylizing page.
-    Still working on this, so I will update again, but created some video game style buttons, gave the page a background using some original art, and overall went for a old school video game look. 
+    Created some video game style buttons using some examples from codepen as inspiration, gave the page a background using some original art, and overall went for a old school video game look. 
+
+
+Feb 4 4:13
+Finished! I took a few days away from the project to ponder whether I wanted to continue building or if I felt satisfied for the time being. I added a reload button to refresh the page so the game can be played over again. 
+
+This project was a great learning experience and has drawn me even more into learning and building. I intend on eventually scaling this into a full on pokemon battle simulator. 

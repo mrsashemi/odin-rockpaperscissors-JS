@@ -60,6 +60,7 @@ const water = document.querySelector('#water');
 const grass = document.querySelector('#grass');
 const returnPokemon = document.querySelector('#returnpokemon');
 const rematch = document.querySelector('#playagain');
+const reloadPage = document.querySelector('#reload')
 
 const battle = ["fire", "water", "grass"];
 let variation = 0
@@ -70,6 +71,7 @@ water.addEventListener('click', chooseWater);
 grass.addEventListener('click', chooseGrass);
 returnPokemon.addEventListener('click', returnPoke);
 rematch.addEventListener('click', playAgain)
+reloadPage.addEventListener('click', reloadGame)
 
 function chooseFire() {
     animate();
@@ -114,6 +116,12 @@ function returnPoke() {
     fireWaterGrass();
 }
 
+function reloadGame() {
+    location.reload();
+}
+
+reloadPage.style.display = 'none';
+
 function playAgain() {
     if (trainerScore < 3 && computerScore < 3) {
         rematch.style.display = 'none';
@@ -134,8 +142,10 @@ function playAgain() {
         ball2GameCoordinateY = 0;
     } else if (trainerScore == 3)  {
         trainerWin();
+        reloadPage.style.display = 'flex';
     } else if (computerScore == 3) {
         computerWin();
+        reloadPage.style.display = 'flex';
     }
 }
 
